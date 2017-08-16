@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="Twitch.CommandInformation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="300">
+    <ScrollViewer>
+        <StackPanel>
+            <GroupBox Header="COMMANDS">
+                <StackPanel>
+                    <GroupBox Header="!commands">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns a list of enabled commands.</Run>
+                        </TextBlock>
+                    </GroupBox>
+                    <GroupBox Header="!deck">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns information about the currently active (selected) deck.</Run>
+                            <LineBreak />
+                            <Bold>Arena:</Bold>
+                            <Run>Current arena run ({class}): {win-loss}, Deck Import Code: {code}[not yet implemented for arena]</Run>
+                            <LineBreak />
+                            <Bold>Constructed:</Bold>
+                            <Run>Currently using "{deckname}", Winrate: {win%} ({win-loss}), Deck Import Code: {code}</Run>
+                        </TextBlock>
+                    </GroupBox>
+                    <GroupBox Header="!alldecks">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns a list of all decks tagged with "Twitch":</Run>
+                            <LineBreak />
+                            <Run>{deckname1}: {code}, {deckname2}: {code}, ...</Run>
+                            <LineBreak />
+                            <Run>To add a deck to this list right-click a deck in HDT and add the "Twitch" tag via "QUICK SET TAG"</Run>
+                        </TextBlock>
+                    </GroupBox>
+                    <GroupBox Header="!hdt">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns a downloadlink to HDT.</Run>
+                        </TextBlock>
+                    </GroupBox>
+                    <GroupBox Header="!hsreplay">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns a link to HSReplay.</Run>
+                        </TextBlock>
+                    </GroupBox>
+                    <GroupBox Header="!lastgamereplay">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns a link to the last game played on HSReplay.</Run>
+                        </TextBlock>
+                    </GroupBox>
+                    <GroupBox Header="!stats {timeframe}">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns information about your stats for the given timeframe:</Run>
+                            <LineBreak />
+                            <Run>Played {#games} games with {#used decks} decks. Total stats: {win-loss}</Run>
+                            <LineBreak />
+                            <Bold>timeframes:</Bold>
+                            <Run>today, week, season, total</Run>
+                        </TextBlock>
+                    </GroupBox>
+                    <GroupBox Header="!arena {timeframe}">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns information about your best arena run for the given timeframe:</Run>
+                            <LineBreak />
+                            <Run>Best arena run {timeframe}: {win-loss} with {classes}</Run>
+                            <LineBreak />
+                            <Bold>timeframes:</Bold>
+                            <Run>today, week, season, total</Run>
+                        </TextBlock>
+                    </GroupBox>
+                    <GroupBox Header="!bestdeck {timeframe}">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns your best constructed deck (highest winrate) for the given timeframe:</Run>
+                            <LineBreak />
+                            <Run>Best deck {timeframe}: "{deckname}", Winrate: {win%} ({win-loss}), Deck Import Code: {code}</Run>
+                            <LineBreak />
+                            <Bold>timeframes:</Bold>
+                            <Run>today, week, season, total</Run>
+                        </TextBlock>
+                    </GroupBox>
+                    <GroupBox Header="!mostplayed {timeframe}">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run>Returns your most played deck (highest number of games) for the given timeframe:</Run>
+                            <LineBreak />
+                            <Run>Most played deck {timeframe}: "{deckname}", Winrate: {win%} ({win-loss}), Deck Import Code: {code}</Run>
+                            <LineBreak />
+                            <Bold>timeframes:</Bold>
+                            <Run>today, week, season, total</Run>
+                        </TextBlock>
+                    </GroupBox>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="auto post game result">
+                <TextBlock TextWrapping="Wrap">
+                    <Run>Writes details about the match, after leaving the victory/defeat screen:</Run>
+                    <LineBreak />
+                    <Run>{result} VS {opponentname} ({opponent class}) after {x min}: {deck win-loss}</Run>
+                </TextBlock>
+            </GroupBox>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
