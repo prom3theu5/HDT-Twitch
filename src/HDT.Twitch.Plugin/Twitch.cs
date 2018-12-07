@@ -1,16 +1,13 @@
-﻿#region
-
-using Hearthstone_Deck_Tracker;
+﻿using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
+using System.Windows;
 using System.Windows.Controls;
-using static System.Windows.Visibility;
+using Config = HDT.Twitch.Core.Config;
 
-#endregion
-
-namespace Twitch
+namespace HDT.Twitch.Plugin
 {
     public class Twitch : IPlugin
     {
@@ -21,8 +18,8 @@ namespace Twitch
             Setup();
             if (MenuItem == null)
                 GenerateMenuItem();
-            GameEvents.OnGameEnd.Add(ChatCommands.OnGameEnd);
-            GameEvents.OnInMenu.Add(ChatCommands.OnInMenu);
+            GameEvents.OnGameEnd.Add(Core.Events.OnGameEnd);
+            GameEvents.OnInMenu.Add(async () => await Core.Events.OnInMenu());
             //UpdateCheck.Run(Version);
         }
 
@@ -62,7 +59,7 @@ namespace Twitch
         {
             MenuItem = new MenuItem { Header = "TWITCH" };
             MenuItem connectMenuItem = new MenuItem { Header = "CONNECT" };
-            MenuItem disconnectMenuItem = new MenuItem { Header = "DISCONNECT", Visibility = Collapsed };
+            MenuItem disconnectMenuItem = new MenuItem { Header = "DISCONNECT", Visibility = Visibility.Collapsed };
             MenuItem settingsMenuItem = new MenuItem { Header = "SETTINGS" };
 
             connectMenuItem.Click += (sender, args) =>
@@ -75,8 +72,8 @@ namespace Twitch
                     else if (Core.Connect())
                     {
                         disconnectMenuItem.Header = $"DISCONNECT ({Config.Instance.User}: {Config.Instance.Channel})";
-                        disconnectMenuItem.Visibility = Visible;
-                        connectMenuItem.Visibility = Collapsed;
+                        disconnectMenuItem.Visibility = Visibility.Visible;
+                        connectMenuItem.Visibility = Visibility.Collapsed;
                     }
                 }
                 catch (Exception ex)
@@ -87,8 +84,8 @@ namespace Twitch
             disconnectMenuItem.Click += (sender, args) =>
             {
                 Core.Disconnect();
-                disconnectMenuItem.Visibility = Collapsed;
-                connectMenuItem.Visibility = Visible;
+                disconnectMenuItem.Visibility = Visibility.Collapsed;
+                connectMenuItem.Visibility = Visibility.Visible;
             };
             settingsMenuItem.Click += (sender, args) => OpenSettings();
 
