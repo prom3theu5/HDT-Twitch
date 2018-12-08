@@ -40,6 +40,11 @@ namespace HDT.Twitch.Commands.GameCommands.Commands
                 .Do(Commands);
         }
 
+        /// <summary>
+        /// Decks the tracker.
+        /// </summary>
+        /// <param name="arg">The <see cref="CommandEventArgs" /> instance containing the event data.</param>
+        /// <returns>Task.</returns>
         private Task DeckTracker(CommandEventArgs arg)
         {
             if (!Config.Instance.ChatCommandHdt) return Task.CompletedTask;
@@ -51,6 +56,11 @@ namespace HDT.Twitch.Commands.GameCommands.Commands
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Hses the replay.
+        /// </summary>
+        /// <param name="arg">The <see cref="CommandEventArgs" /> instance containing the event data.</param>
+        /// <returns>Task.</returns>
         private Task HsReplay(CommandEventArgs arg)
         {
             if (!Config.Instance.ChatCommandHsr) return Task.CompletedTask;
@@ -62,6 +72,11 @@ namespace HDT.Twitch.Commands.GameCommands.Commands
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Commandses the specified argument.
+        /// </summary>
+        /// <param name="arg">The <see cref="CommandEventArgs" /> instance containing the event data.</param>
+        /// <returns>Task.</returns>
         private Task Commands(CommandEventArgs arg)
         {
             if (!Config.Instance.ChatCommandCommands) return Task.CompletedTask;

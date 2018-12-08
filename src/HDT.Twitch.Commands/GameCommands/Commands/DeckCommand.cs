@@ -44,6 +44,7 @@ namespace HDT.Twitch.Commands.GameCommands.Commands
         /// <summary>
         /// Does the get deck.
         /// </summary>
+        /// <param name="parameters">The <see cref="CommandEventArgs" /> instance containing the event data.</param>
         /// <returns>Task.</returns>
         private Task DoGetDeck(CommandEventArgs parameters)
         {

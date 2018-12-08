@@ -42,6 +42,8 @@ namespace HDT.Twitch.Commands.GameCommands.Commands
         /// <summary>
         /// Does the get replay.
         /// </summary>
+        /// <param name="parameters">The <see cref="CommandEventArgs" /> instance containing the event data.</param>
+        /// <returns>Task.</returns>
         private Task DoGetReplay(CommandEventArgs parameters)
         {
             if (!Config.Instance.ChatCommandHdt) return Task.CompletedTask;
