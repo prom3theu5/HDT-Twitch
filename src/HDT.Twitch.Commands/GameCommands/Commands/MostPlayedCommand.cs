@@ -5,18 +5,37 @@ using Hearthstone_Deck_Tracker.Enums;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Config = HDT.Twitch.Core.Config;
 
 namespace HDT.Twitch.Commands.GameCommands.Commands
 {
+    /// <summary>
+    /// Class MostPlayedCommand.
+    /// Implements the <see cref="HDT.Twitch.Commands.ChannelCommand" />
+    /// </summary>
+    /// <seealso cref="HDT.Twitch.Commands.ChannelCommand" />
     public class MostPlayedCommand : ChannelCommand
     {
+        /// <summary>
+        /// The missing time frame message
+        /// </summary>
         private const string MissingTimeFrameMessage =
             "Please specify a timeframe. Available timeframes are: today, week, season and total. (Example: !stats today)";
 
+        /// <summary>
+        /// Creates a new instance of twitch command,
+        /// use ": base(module)" in the derived class'
+        /// constructor to make sure module is assigned
+        /// </summary>
+        /// <param name="module">Module this command resides in</param>
         public MostPlayedCommand(ChannelModule module) : base(module)
         {
         }
 
+        /// <summary>
+        /// Initializes the specified builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
         internal override void Init(CommandGroupBuilder builder)
         {
             builder.CreateCommand(Module.Prefix + "bestdeck")
@@ -25,11 +44,22 @@ namespace HDT.Twitch.Commands.GameCommands.Commands
                 .Do(DoPostMostPlayed);
         }
 
+        /// <summary>
+        /// Does the post most played.
+        /// </summary>
+        /// <param name="parameters">The <see cref="CommandEventArgs" /> instance containing the event data.</param>
+        /// <returns>Task.</returns>
         private Task DoPostMostPlayed(CommandEventArgs parameters)
         {
+            if (!Config.Instance.ChatCommandHdt) return Task.CompletedTask;
+            if (Config.Instance.ModeratorOnly)
+            {
+                if (!parameters.IsAdmin) return Task.CompletedTask;
+            }
+
             if (!parameters.Args.Any())
             {
-                Client.SendMessage(Module.Client.Channel, MissingTimeFrameMessage);
+                Module.Client.SendMessage(MissingTimeFrameMessage);
                 return Task.CompletedTask;
             }
 

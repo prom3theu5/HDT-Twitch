@@ -1,8 +1,6 @@
 ﻿using HDT.Twitch.Core;
 using HDT.Twitch.Core.Modules;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using System;
 using System.Collections.Generic;
 
 namespace HDT.Twitch.Commands
@@ -14,11 +12,6 @@ namespace HDT.Twitch.Commands
     /// <seealso cref="HDT.Twitch.Core.Modules.IModule" />
     public abstract class ChannelModule : IModule
     {
-        /// <summary>
-        /// Gets the services.
-        /// </summary>
-        /// <value>The services.</value>
-        public IServiceProvider Services { get; }
         /// <summary>
         /// Gets the commands.
         /// </summary>
@@ -51,13 +44,13 @@ namespace HDT.Twitch.Commands
         /// <summary>
         /// Initializes a new instance of the <see cref="ChannelModule" /> class.
         /// </summary>
-        /// <param name="services">The services.</param>
-        protected ChannelModule(IServiceProvider services)
+        /// <param name="client">The client.</param>
+        /// <param name="logger">The logger.</param>
+        protected ChannelModule(IClient client, ILogger logger)
         {
-            Services = services;
             Commands = new HashSet<ChannelCommand>();
-            Client = services.GetRequiredService<IClient>();
-            Logger = services.GetRequiredService<ILogger>();
+            Client = client;
+            Logger = logger;
         }
     }
 }

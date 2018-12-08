@@ -1,22 +1,24 @@
 ﻿using HDT.Twitch.Commands.GameCommands.Commands;
+using HDT.Twitch.Core;
 using HDT.Twitch.Core.Extensions;
 using HDT.Twitch.Core.Modules;
-using System;
+using Serilog;
 
 namespace HDT.Twitch.Commands.GameCommands
 {
     /// <summary>
     /// Class GameCommandsModule.
-    /// Implements the <see cref="DocBot.Commands.ChannelModule" />
+    /// Implements the <see cref="HDT.Twitch.Commands.ChannelModule" />
     /// </summary>
-    /// <seealso cref="DocBot.Commands.ChannelModule" />
+    /// <seealso cref="HDT.Twitch.Commands.ChannelModule" />
     public class GameCommandsModule : ChannelModule
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GameCommandsModule"/> class.
+        /// Initializes a new instance of the <see cref="GameCommandsModule" /> class.
         /// </summary>
-        /// <param name="services">The services.</param>
-        public GameCommandsModule(IServiceProvider services) : base(services)
+        /// <param name="client">The client.</param>
+        /// <param name="logger">The logger.</param>
+        public GameCommandsModule(IClient client, ILogger logger) : base(client, logger)
         {
             Commands.Add(new ArenaCommand(this));
             Commands.Add(new BestDeckCommand(this));

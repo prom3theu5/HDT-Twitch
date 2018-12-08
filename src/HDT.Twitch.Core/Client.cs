@@ -99,12 +99,19 @@ namespace HDT.Twitch.Core
             TwitchClient = new TwitchClient(protocol: ClientProtocol.TCP);
             TwitchClient.Initialize(credentials, _channel);
             TwitchClient.OnConnected += TwitchClient_OnConnected;
+            TwitchClient.OnDisconnected += TwitchClient_OnDisconnected;
             TwitchClient.OnJoinedChannel += TwitchClient_OnJoinedChannel;
             TwitchClient.OnMessageReceived += TwitchClient_OnMessageReceived;
 
             //Extensibility
             _services = new ServiceCollection(this);
         }
+
+        private void TwitchClient_OnDisconnected(object sender, TwitchLib.Communication.Events.OnDisconnectedEventArgs e)
+        {
+            _logger.Information("Disconnected from Twitch");
+        }
+
 
         /// <summary>
         /// Twitches the client on joined channel.
@@ -114,6 +121,7 @@ namespace HDT.Twitch.Core
         private void TwitchClient_OnJoinedChannel(object sender, TwitchLib.Client.Events.OnJoinedChannelArgs e)
         {
             _logger.Information("Joined Channel > {channel} as {user}", e.Channel, e.BotUsername);
+            SendMessage("Heathstone Deck Tracker Connected To Channel!");
         }
 
         /// <summary>
@@ -170,7 +178,7 @@ namespace HDT.Twitch.Core
 
         public void SendMessage(string message)
         {
-            TwitchClient.SendMessage(Channel, message);
+            TwitchClient.SendMessage(Channel, $".me says {message}");
         }
 
         #region Services

@@ -64,6 +64,7 @@
                     <CheckBox Content="Save stat of active deck to file" IsChecked="{Binding Source={x:Static core:Config.Instance}, Path=SaveStatsToFile}"/>
                 </DockPanel>
                 <CheckBox Margin="0,5,0,0" Content="[Debug] Log Twitch messages" IsChecked="{Binding Source={x:Static core:Config.Instance}, Path=TwitchLogging}"/>
+                <CheckBox Margin="0,5,0,0" Content="Moderator Only Command Permissions" IsChecked="{Binding Source={x:Static core:Config.Instance}, Path=ModeratorOnly}"/>
             </StackPanel>
         </GroupBox>
         <DockPanel>

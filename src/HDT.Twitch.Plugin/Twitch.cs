@@ -41,7 +41,7 @@ namespace HDT.Twitch.Plugin
 
         public string Author => "Prom3theu5";
 
-        public Version Version => new Version(0, 0, 0, 1);
+        public Version Version => new Version(1, 0, 0, 0);
 
         public MenuItem MenuItem { get; private set; }
 
@@ -57,7 +57,7 @@ namespace HDT.Twitch.Plugin
 
         private void GenerateMenuItem()
         {
-            MenuItem = new MenuItem { Header = "TWITCH" };
+            MenuItem = new MenuItem { Header = "Twitch Plugin" };
             MenuItem connectMenuItem = new MenuItem { Header = "CONNECT" };
             MenuItem disconnectMenuItem = new MenuItem { Header = "DISCONNECT", Visibility = Visibility.Collapsed };
             MenuItem settingsMenuItem = new MenuItem { Header = "SETTINGS" };

@@ -23,6 +23,7 @@ namespace HDT.Twitch.Events
 
         public async Task OnInMenu()
         {
+            if (!_client.TwitchClient.IsConnected) return;
             if (!Config.Instance.AutoPostGameResult)
                 return;
             if (_lastGame == null)
